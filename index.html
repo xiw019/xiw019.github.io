@@ -170,7 +170,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-01-08 16:56:12 / Modified: 23:39:32" itemprop="dateCreated datePublished" datetime="2021-01-08T16:56:12+08:00">2021-01-08</time>
+              <time title="Created: 2021-01-08 16:56:12 / Modified: 23:58:47" itemprop="dateCreated datePublished" datetime="2021-01-08T16:56:12+08:00">2021-01-08</time>
             </span>
 
           
@@ -206,27 +206,14 @@
 
       
           <h2 id="写在开头的话"><a href="#写在开头的话" class="headerlink" title="写在开头的话"></a>写在开头的话</h2><p>上学期的时候，学校快递给了我一块树莓派4B做项目使用。在项目完成之后，我的树莓派和大都数人的树莓派一样<del>成功的吃灰</del>，继续在我手里发光发热。本着物尽其用的原则，我打算将树莓派制作成一台便携的软路由。</p>
-<p>今天的主角：树莓派4B 1G版<br><img src="https://img.imgdb.cn/item/5ff8485c3ffa7d37b339b712.jpg" width="600" height="400" align="middle" /></p>
-<h2 id="Pros-amp-Cons"><a href="#Pros-amp-Cons" class="headerlink" title="Pros &amp; Cons"></a>Pros &amp; Cons</h2><p>树莓派4B的优点有很多，比如卡片般小巧，有GPIO接口。而对于一台便携软路由来说，它的优点在于自带网卡，可以直接作为AP使用。并且树莓派4B本身的性能作为软路由甚至可以说大材小用。<br>缺点也很明显，只有一个RJ45网线接口，本身网卡信号也很弱。想要接驳无线网卡或USB转网线接口等配件则需要重新编译openwrt固件。由于各类usb网卡固件复杂，并不容易找到适用于树莓派的产品。因此，树莓派并不适合作为主路由使用。</p>
-<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>由于疫情原因需要长期呆在国内，全局科学上网就成了刚需。在家时可以通过软路由完成全局科学上网，而外出时则可以携带树莓派作为二级路由，实现在酒店内全局科学上网的目的。</p>
-<h2 id="搭建过程"><a href="#搭建过程" class="headerlink" title="搭建过程"></a>搭建过程</h2><h3 id="编译固件"><a href="#编译固件" class="headerlink" title="编译固件"></a>编译固件</h3><p>这里使用到的固件为openwrt<br>首先 在Github下载L大的源码：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> git <span class="built_in">clone</span> https://github.com/coolsnowwolf/lede</span><br><span class="line">$ <span class="built_in">cd</span> lede</span><br></pre></td></tr></table></figure>
-<p>接着 进行固件编译：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./scripts/feeds update -a</span><br><span class="line">./scripts/feeds install -a</span><br><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
-<p>根据树莓派soc的型号进行配置：<br><img src="https://img.imgdb.cn/item/5ff84ba63ffa7d37b33c9c4b.png"></p>
-<p>选择相应的插件：<br>只选择了科学上网的插件。<br><img src="https://img.imgdb.cn/item/5ff84c0a3ffa7d37b33cd037.png"></p>
-<p>下载dl库：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make -j8 download V=s</span><br></pre></td></tr></table></figure>
-<p>配置编译线程数 进行编译：<br>这里使用的ubuntu机器的cpu为10700，所以使用16线程编译来加快速度。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make -j16 V=s</span><br></pre></td></tr></table></figure>
-<p>由于使用了16线程进行编译，编译很快就完成了：<br><img src="https://img.imgdb.cn/item/5ff84dc53ffa7d37b33da9ac.png"></p>
-<h3 id="烧写固件"><a href="#烧写固件" class="headerlink" title="烧写固件"></a>烧写固件</h3><p>将编译后的固件从ssh服务器，<del>说是服务器，实际就在我的右手边</del>，下载到windows台机上并使用balenaEtcher烧写固件：<br><img src="https://img.imgdb.cn/item/5ff84f8e3ffa7d37b33e79c1.png"></p>
-<p><img src="https://img.imgdb.cn/item/5ff8509e3ffa7d37b33f0c0c.png"></p>
-<h3 id="配置软路由"><a href="#配置软路由" class="headerlink" title="配置软路由"></a>配置软路由</h3><p>连接openwrt热点，在浏览器键入openwrt默认地址：192.168.2.1 登录到后台管理页面:<br><img src="https://img.imgdb.cn/item/5ff853283ffa7d37b3404a1d.png"></p>
-<p>至此，系统的配置就完成了,<del>详细设置因某404原因无法预览</del></p>
-<h2 id="一些总结"><a href="#一些总结" class="headerlink" title="一些总结"></a>一些总结</h2><p>由于金属外壳对WiFi信号的影响过于严重，更换了另一块树莓派并使用了带有亚克力的外壳，<del>你究竟有多少树莓派啊</del>。<br><img src="https://img.imgdb.cn/item/5ff853e43ffa7d37b3409ff7.jpg" width="400" height="750" align="middle" /></p>
-<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>树莓派作为一块开发板，有各种有趣的玩法。仅仅拿来作为软路由使用，可以说是浪费了它的很多特性。希望正在阅读这篇文章的你的树莓派能在你手里继续发挥它的作用！</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/08/%E5%B0%86%E6%A0%91%E8%8E%93%E6%B4%BE%E6%89%93%E9%80%A0%E6%88%90%E4%B8%80%E5%8F%B0%E8%BD%AF%E8%B7%AF%E7%94%B1%EF%BC%81/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
