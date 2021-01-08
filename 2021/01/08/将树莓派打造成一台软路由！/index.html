@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="写在开头的话上学期的时候，学校快递给了我一块树莓派4B做项目使用。在项目完成之后，我的树莓派和大都数人的树莓派一样成功的吃灰，继续在我手里发光发热。本着物尽其用的原则，我打算将树莓派制作成一台便携的软路由。 今天的主角：树莓派4B 1G版 Pros &amp; Cons树莓派4B的优点有很多，比如卡片般小巧，有GPIO接口。而对于一台便携软路由来说，它的优点在于自带网卡，可以直接作为AP使用。并且">
+<meta property="og:type" content="article">
+<meta property="og:title" content="将树莓派打造成一台软路由！">
+<meta property="og:url" content="http://example.com/2021/01/08/%E5%B0%86%E6%A0%91%E8%8E%93%E6%B4%BE%E6%89%93%E9%80%A0%E6%88%90%E4%B8%80%E5%8F%B0%E8%BD%AF%E8%B7%AF%E7%94%B1%EF%BC%81/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="写在开头的话上学期的时候，学校快递给了我一块树莓派4B做项目使用。在项目完成之后，我的树莓派和大都数人的树莓派一样成功的吃灰，继续在我手里发光发热。本着物尽其用的原则，我打算将树莓派制作成一台便携的软路由。 今天的主角：树莓派4B 1G版 Pros &amp; Cons树莓派4B的优点有很多，比如卡片般小巧，有GPIO接口。而对于一台便携软路由来说，它的优点在于自带网卡，可以直接作为AP使用。并且">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img.imgdb.cn/item/5ff8485c3ffa7d37b339b712.jpg">
+<meta property="og:image" content="https://img.imgdb.cn/item/5ff84ba63ffa7d37b33c9c4b.png">
+<meta property="og:image" content="https://img.imgdb.cn/item/5ff84c0a3ffa7d37b33cd037.png">
+<meta property="og:image" content="https://img.imgdb.cn/item/5ff84dc53ffa7d37b33da9ac.png">
+<meta property="og:image" content="https://img.imgdb.cn/item/5ff84f8e3ffa7d37b33e79c1.png">
+<meta property="og:image" content="https://img.imgdb.cn/item/5ff8509e3ffa7d37b33f0c0c.png">
+<meta property="og:image" content="https://img.imgdb.cn/item/5ff853283ffa7d37b3404a1d.png">
+<meta property="og:image" content="https://img.imgdb.cn/item/5ff853e43ffa7d37b3409ff7.jpg">
+<meta property="article:published_time" content="2021-01-08T08:56:12.000Z">
+<meta property="article:modified_time" content="2021-01-08T15:28:16.791Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="随笔">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.imgdb.cn/item/5ff8485c3ffa7d37b339b712.jpg">
+
+<link rel="canonical" href="http://example.com/2021/01/08/%E5%B0%86%E6%A0%91%E8%8E%93%E6%B4%BE%E6%89%93%E9%80%A0%E6%88%90%E4%B8%80%E5%8F%B0%E8%BD%AF%E8%B7%AF%E7%94%B1%EF%BC%81/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>将树莓派打造成一台软路由！ | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/08/%E5%B0%86%E6%A0%91%E8%8E%93%E6%B4%BE%E6%89%93%E9%80%A0%E6%88%90%E4%B8%80%E5%8F%B0%E8%BD%AF%E8%B7%AF%E7%94%B1%EF%BC%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          将树莓派打造成一台软路由！
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-08 16:56:12 / Modified: 23:28:16" itemprop="dateCreated datePublished" datetime="2021-01-08T16:56:12+08:00">2021-01-08</time>
+            </span>
+
+          
+            <span id="/2021/01/08/%E5%B0%86%E6%A0%91%E8%8E%93%E6%B4%BE%E6%89%93%E9%80%A0%E6%88%90%E4%B8%80%E5%8F%B0%E8%BD%AF%E8%B7%AF%E7%94%B1%EF%BC%81/" class="post-meta-item leancloud_visitors" data-flag-title="将树莓派打造成一台软路由！" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2021/01/08/%E5%B0%86%E6%A0%91%E8%8E%93%E6%B4%BE%E6%89%93%E9%80%A0%E6%88%90%E4%B8%80%E5%8F%B0%E8%BD%AF%E8%B7%AF%E7%94%B1%EF%BC%81/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/01/08/%E5%B0%86%E6%A0%91%E8%8E%93%E6%B4%BE%E6%89%93%E9%80%A0%E6%88%90%E4%B8%80%E5%8F%B0%E8%BD%AF%E8%B7%AF%E7%94%B1%EF%BC%81/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="写在开头的话"><a href="#写在开头的话" class="headerlink" title="写在开头的话"></a>写在开头的话</h2><p>上学期的时候，学校快递给了我一块树莓派4B做项目使用。在项目完成之后，我的树莓派和大都数人的树莓派一样<del>成功的吃灰</del>，继续在我手里发光发热。本着物尽其用的原则，我打算将树莓派制作成一台便携的软路由。</p>
+<p>今天的主角：树莓派4B 1G版<br><img src="https://img.imgdb.cn/item/5ff8485c3ffa7d37b339b712.jpg" width="600" height="400" align="middle" /></p>
+<h2 id="Pros-amp-Cons"><a href="#Pros-amp-Cons" class="headerlink" title="Pros &amp; Cons"></a>Pros &amp; Cons</h2><p>树莓派4B的优点有很多，比如卡片般小巧，有GPIO接口。而对于一台便携软路由来说，它的优点在于自带网卡，可以直接作为AP使用。并且树莓派4B本身的性能作为软路由甚至可以说大材小用。<br>缺点也很明显，只有一个RJ45网线接口，本身网卡信号也很弱。想要接驳无线网卡或USB转网线接口等配件则需要重新编译openwrt固件。由于各类usb网卡固件复杂，并不容易找到适用于树莓派的产品。因此，树莓派并不适合作为主路由使用。</p>
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>由于疫情原因需要长期呆在国内，全局科学上网就成了刚需。在家时可以通过软路由完成全局科学上网，而外出时则可以携带树莓派作为二级路由，实现在酒店内全局科学上网的目的。</p>
+<h2 id="搭建过程"><a href="#搭建过程" class="headerlink" title="搭建过程"></a>搭建过程</h2><h3 id="编译固件"><a href="#编译固件" class="headerlink" title="编译固件"></a>编译固件</h3><p>这里使用到的固件为openwrt<br>首先 在Github下载L大的源码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> git <span class="built_in">clone</span> https://github.com/coolsnowwolf/lede</span><br><span class="line">$ <span class="built_in">cd</span> lede</span><br></pre></td></tr></table></figure>
+<p>接着 进行固件编译：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./scripts/feeds update -a</span><br><span class="line">./scripts/feeds install -a</span><br><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
+<p>根据树莓派soc的型号进行配置：<br><img src="https://img.imgdb.cn/item/5ff84ba63ffa7d37b33c9c4b.png"></p>
+<p>选择相应的插件：<br>只选择了科学上网的插件。<br><img src="https://img.imgdb.cn/item/5ff84c0a3ffa7d37b33cd037.png"></p>
+<p>下载dl库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make -j8 download V=s</span><br></pre></td></tr></table></figure>
+<p>配置编译线程数 进行编译：<br>这里使用的ubuntu机器的cpu为10700，所以使用16线程编译来加快速度。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make -j16 V=s</span><br></pre></td></tr></table></figure>
+<p>由于使用了16线程进行编译，编译很快就完成了：<br><img src="https://img.imgdb.cn/item/5ff84dc53ffa7d37b33da9ac.png"></p>
+<h3 id="烧写固件"><a href="#烧写固件" class="headerlink" title="烧写固件"></a>烧写固件</h3><p>将编译后的固件从ssh服务器，<del>说是服务器，实际就在我的右手边</del>，下载到windows台机上并使用balenaEtcher烧写固件：<br><img src="https://img.imgdb.cn/item/5ff84f8e3ffa7d37b33e79c1.png"></p>
+<p><img src="https://img.imgdb.cn/item/5ff8509e3ffa7d37b33f0c0c.png"></p>
+<h3 id="配置软路由"><a href="#配置软路由" class="headerlink" title="配置软路由"></a>配置软路由</h3><p>连接openwrt热点，在浏览器键入openwrt默认地址：192.168.2.1 登录到后台管理页面:<br><img src="https://img.imgdb.cn/item/5ff853283ffa7d37b3404a1d.png"></p>
+<p>至此，系统的配置就完成了,<del>详细设置因某404原因无法预览</del></p>
+<h2 id="一些总结"><a href="#一些总结" class="headerlink" title="一些总结"></a>一些总结</h2><p>由于金属外壳对WiFi信号的影响过于严重，更换了另一块树莓派并使用了带有亚克力的外壳，<del>你究竟有多少树莓派啊</del>。<br><img src="https://img.imgdb.cn/item/5ff853e43ffa7d37b3409ff7.jpg" width="800" height="400" align="middle" /></p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>树莓派作为一块开发板，有各种有趣的玩法。仅仅拿来作为软路由使用，可以说是浪费了它的很多特性。希望正在阅读这篇文章的你的树莓派能在你手里继续发挥它的作用！</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/08/hello-world/" rel="next" title="Hello World">
+      Hello World <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%BC%80%E5%A4%B4%E7%9A%84%E8%AF%9D"><span class="nav-number">1.</span> <span class="nav-text">写在开头的话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pros-amp-Cons"><span class="nav-number">2.</span> <span class="nav-text">Pros &amp; Cons</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87"><span class="nav-number">3.</span> <span class="nav-text">目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">搭建过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%9B%BA%E4%BB%B6"><span class="nav-number">4.1.</span> <span class="nav-text">编译固件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%83%A7%E5%86%99%E5%9B%BA%E4%BB%B6"><span class="nav-number">4.2.</span> <span class="nav-text">烧写固件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%BD%AF%E8%B7%AF%E7%94%B1"><span class="nav-number">4.3.</span> <span class="nav-text">配置软路由</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">一些总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="nav-number">6.</span> <span class="nav-text">写在最后</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : true,
+      notify     : true,
+      appId      : 'WTnm6hcRAjTko3Xknn0BUaQN-gzGzoHsz# Your leancloud application appid',
+      appKey     : 'CIt3xiq4ltGQv2tQI9tYVig8# Your leancloud application appkey',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
