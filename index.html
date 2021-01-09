@@ -218,7 +218,21 @@
                 <time title="Modified: 2021-01-09 01:03:25" itemprop="dateModified" datetime="2021-01-09T01:03:25+08:00">2021-01-09</time>
               </span>
 
-          <br>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2021/01/08/%E5%B0%86%E6%A0%91%E8%8E%93%E6%B4%BE%E6%89%93%E9%80%A0%E6%88%90%E4%B8%80%E5%8F%B0%E8%BD%AF%E8%B7%AF%E7%94%B1%EF%BC%81/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/01/08/%E5%B0%86%E6%A0%91%E8%8E%93%E6%B4%BE%E6%89%93%E9%80%A0%E6%88%90%E4%B8%80%E5%8F%B0%E8%BD%AF%E8%B7%AF%E7%94%B1%EF%BC%81/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
@@ -470,6 +484,35 @@
   
 
   
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'WTnm6hcRAjTko3Xknn0BUaQN-gzGzoHsz',
+      appKey     : 'CIt3xiq4ltGQv2tQI9tYVig8',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
 
 </body>
 </html>
